@@ -7,24 +7,47 @@
 #include <unordered_map>
 #include "rapidxml-1.13/rapidxml.hpp"
 using namespace std;
+/// <summary>
+/// The namespacer of the library
+/// </summary>
 namespace TMXReader{
 	/// Shapes
 	// -------------------------------------------
+	/// <summary>
+	/// Shape point 
+	/// </summary>
 	struct Point
 	{
-		int x, y;
+		/// <summary>
+		/// X position of the point
+		/// </summary>
+		int _x;
+		/// <summary>
+		/// Y position of the point
+		/// </summary>
+		int _y
 	};
+
+	/// <summary>
+	/// Class for managing the Shapes
+	/// </summary>
 	class ObjectShape
 	{
 	public:
+		/// <summary>
+		/// Default constructor
+		/// </summary>
 		ObjectShape() {};
-		ObjectShape(int, int, int = 0, int = 0);
+	
+
+		ObjectShape(const int & x , const int & y, const int & w = 0, const int & h = 0);
 	protected:
 		int _x, _y, _w, _h;
 	};
 	class Ellipse:public ObjectShape
 	{
 	public:
+
 		Ellipse(int x, int y, int w = 0, int h = 0):ObjectShape(x,y,w,h) {}
 		void getCenter(int& cx, int& cy) {
 			cx = _x + _w / 2;
@@ -39,10 +62,12 @@ namespace TMXReader{
 	class PolyLine:public ObjectShape
 	{
 	public:
+
 		PolyLine(int x, int y, string points);
 		vector<Point> get_ShapePoints() { return _ShapePoints; };
 
 	protected:
+
 		vector<Point>_ShapePoints;
 	};
 	class Polygon:public PolyLine
